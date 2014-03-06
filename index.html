@@ -24,13 +24,24 @@
   
   <body>
     
-    <div class="container" id="navigation">
-      
-    </div>
     <div class="container" id="content">
       
     </div>
     
+            <!--Vertex shader-->
+    <script id="vertexShader" type="x-shader/x-vertex">
+			attribute vec4 position;
+			uniform mat4 Mmatrix;
+			void main(void) {
+				gl_Position = position * Mmatrix;
+			}
+		</script>
+		<!--Fragment shader-->
+    <script id="fragmentShader" type="x-shader/x-fragment">
+			void main(void) {
+				gl_FragColor = vec4(1.0,0.0,0.0,1.0);
+			}
+		</script>	
     <script type="text/javascript" src="js/lib/require/require.js" data-main="js/setup.js"></script>
   </body>
 </html>

@@ -84,3 +84,10 @@ a, a:focus, a:active, li, li:focus, li:active {
    outline-color: transparent !important;
    outline:0;
 }
+
+#canvas {
+    width:400px;
+    height:300px;
+    display:block;
+    margin:0 auto;
+}

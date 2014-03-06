@@ -1,7 +1,7 @@
 define(function(require) {
   
   var _    = require('underscore');
-  var Base = require('game/controller/base');
+  var Base = require('webgl/controller/base');
   
   var LabOne = function() {
     

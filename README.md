@@ -1,4 +1,5 @@
-ria
+3D-Grafik
+
 ===
 
-Repository for the course RIA-development with JavaScript
+Laborations for 3D-grafik course, Jesper Tullberg

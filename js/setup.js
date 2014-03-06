@@ -11,8 +11,9 @@ require.config({
     model        : '../app/model',
     collection   : '../app/collection',
     template     : '../../template',
-    game         : '../game',
+    webgl        : '../webgl',
     utility      : '../utility',
+    shader       : '../../shader',
     
     // Lib paths
     jquery       : 'jquery/jquery',
