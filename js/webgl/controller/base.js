@@ -6,13 +6,11 @@ define(function(require) {
   
   var Base = function() {
     
-    this.onInit();
-    
   };
   
   Base.prototype.onInit = function() {
     
-    // Empty stub
+    console.log("base onInit");
     
   };
   
@@ -27,9 +25,9 @@ define(function(require) {
     
   };
   
-  Base.prototype.onRender = function(delta) {
+  Base.prototype.onRender = function(canvasHandler, delta) {
     
-    
+    console.log("base render.");
     
   };
   

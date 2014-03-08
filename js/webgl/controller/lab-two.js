@@ -7,7 +7,15 @@ define(function(require) {
     
   };
   
-  _.extend(LabTwo, Base);
+  _.extend(LabTwo.prototype, Base.prototype);
+  
+  LabTwo.prototype.onInit = function() {
+    Base.prototype.onInit();
+  };
+  
+  LabTwo.prototype.onRender = function(canvasHandler, delta) {
+    console.log("lab two render.");
+  };
   
   return LabTwo;
 });

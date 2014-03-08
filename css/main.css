@@ -85,6 +85,11 @@ a, a:focus, a:active, li, li:focus, li:active {
    outline:0;
 }
 
+#center-div {
+  display:block;
+  margin:0 auto;
+}
+
 #canvas {
     width:400px;
     height:300px;

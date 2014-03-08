@@ -56,6 +56,14 @@ define(function(require) {
     }
   };
   
+  CanvasHandler.prototype.getAttribLocation = function(name) {
+    return this._ctx.getAttribLocation(this._program, name);
+  };
+  
+  CanvasHandler.prototype.getUniformLocation = function(name) {
+    return this._ctx.getUniformLocation(this._program, name);
+  };
+  
   return CanvasHandler;
   
 });

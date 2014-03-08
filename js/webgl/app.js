@@ -3,13 +3,13 @@ console.log("System: WebGL Application loading...");
 define(function(require) {
   
   // Required modules
-  var $                = require('jquery');
-  
-  var Raf              = require('utility/raf');
-  var CanvasHandler    = require('webgl/canvas-handler');
-  var BaseController   = require('webgl/controller/base');
-  var LabOneController = require('webgl/controller/lab-one');
-  var LabTwoController = require('webgl/controller/lab-two');
+  var $                  = require('jquery');
+  var Raf                = require('utility/raf');
+  var CanvasHandler      = require('webgl/canvas-handler');
+  var BaseController     = require('webgl/controller/base');
+  var LabOneController   = require('webgl/controller/lab-one');
+  var LabTwoController   = require('webgl/controller/lab-two');
+  var LabThreeController = require('webgl/controller/lab-three');
   
   var App = function() {
   };
@@ -23,12 +23,20 @@ define(function(require) {
     this._controller = new BaseController();
     this._controller.onInit();
     
+    var that = this;
     $('#lab-one-button').click(function() {
-        console.log("button one clicked");
+      that._controller = new LabOneController();
+      that._controller.onInit();
     });
     
     $('#lab-two-button').click(function() {
-        console.log("button two clicked");
+      that._controller = new LabTwoController();
+      that._controller.onInit();
+    });
+    
+    $('#lab-three-button').click(function() {
+      that._controller = new LabThreeController();
+      that._controller.onInit();
     });
   };
   
@@ -58,7 +66,7 @@ define(function(require) {
       endTime   = startTime;
 
       that._canvasHandler.clearScreen();
-      that._controller.onRender(delta);
+      that._controller.onRender(that._canvasHandler, delta);
           
     })();
     
