@@ -26,17 +26,17 @@ define(function(require) {
     var that = this;
     $('#lab-one-button').click(function() {
       that._controller = new LabOneController();
-      that._controller.onInit();
+      that._controller.onInit(that._canvasHandler);
     });
     
     $('#lab-two-button').click(function() {
       that._controller = new LabTwoController();
-      that._controller.onInit();
+      that._controller.onInit(that._canvasHandler);
     });
     
     $('#lab-three-button').click(function() {
       that._controller = new LabThreeController();
-      that._controller.onInit();
+      that._controller.onInit(that._canvasHandler);
     });
   };
   

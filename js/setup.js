@@ -8,12 +8,12 @@ require.config({
     // Base folder paths
     app          : '../app',
     view         : '../app/view',
-    model        : '../app/model',
     collection   : '../app/collection',
     template     : '../../template',
     webgl        : '../webgl',
     utility      : '../utility',
     shader       : '../../shader',
+    model        : '../../model',
     
     // Lib paths
     jquery       : 'jquery/jquery',

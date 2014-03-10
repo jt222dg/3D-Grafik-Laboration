@@ -9,7 +9,9 @@ define(function(require) {
   
   _.extend(LabTwo.prototype, Base.prototype);
   
-  LabTwo.prototype.onInit = function() {
+  LabTwo.prototype.onInit = function(canvasHandler) {
+    var ctx     = canvasHandler.getContext();
+    var program = canvasHandler.getProgram();
     Base.prototype.onInit();
   };
   

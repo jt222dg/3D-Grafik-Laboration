@@ -46,6 +46,8 @@ define(function(require) {
       this._ctx.attachShader(this._program, this._vertexShader);
       this._ctx.attachShader(this._program, this._fragmentShader);
       this._ctx.linkProgram(this._program);
+      
+      this._ctx.useProgram(this._program);
     }
     
   };
@@ -62,6 +64,14 @@ define(function(require) {
   
   CanvasHandler.prototype.getUniformLocation = function(name) {
     return this._ctx.getUniformLocation(this._program, name);
+  };
+  
+  CanvasHandler.prototype.getContext = function() {
+    return this._ctx;
+  };
+  
+  CanvasHandler.prototype.getProgram = function() {
+    return this._program;
   };
   
   return CanvasHandler;
