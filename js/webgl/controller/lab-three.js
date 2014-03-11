@@ -9,14 +9,13 @@ define(function(require) {
   
   _.extend(LabThree.prototype, Base.prototype);
   
-  LabThree.prototype.onInit = function(canvasHandler) {
-    var ctx     = canvasHandler.getContext();
-    var program = canvasHandler.getProgram();
+  LabThree.prototype.onInit = function(context) {
+    var gl      = context.gl;
+    var program = context.program;
     Base.prototype.onInit();
   };
   
-  LabThree.prototype.onRender = function(canvasHandler, delta) {
-    console.log("lab three render.");
+  LabThree.prototype.onRender = function(context, delta) {
   };
   
   return LabThree;

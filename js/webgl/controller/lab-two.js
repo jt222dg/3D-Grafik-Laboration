@@ -9,14 +9,13 @@ define(function(require) {
   
   _.extend(LabTwo.prototype, Base.prototype);
   
-  LabTwo.prototype.onInit = function(canvasHandler) {
-    var ctx     = canvasHandler.getContext();
-    var program = canvasHandler.getProgram();
+  LabTwo.prototype.onInit = function(context) {
+    var gl      = context.gl;
+    var program = context.program;
     Base.prototype.onInit();
   };
   
-  LabTwo.prototype.onRender = function(canvasHandler, delta) {
-    console.log("lab two render.");
+  LabTwo.prototype.onRender = function(context, delta) {
   };
   
   return LabTwo;

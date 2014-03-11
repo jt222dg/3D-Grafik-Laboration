@@ -10,8 +10,6 @@ define(function(require) {
   
   Base.prototype.onInit = function() {
     
-    console.log("base onInit");
-    
   };
   
   Base.prototype.onEvent = function() {
@@ -22,17 +20,13 @@ define(function(require) {
   
   Base.prototype.onLogic = function(delta) {
     
-    
   };
   
   Base.prototype.onRender = function(canvasHandler, delta) {
     
-    console.log("base render.");
-    
   };
   
   Base.prototype.onCleanUp = function() {
-    
     
   };
   
