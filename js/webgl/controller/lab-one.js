@@ -14,17 +14,24 @@ define(function(require) {
   _.extend(LabOne.prototype, Base.prototype);
   
   LabOne.prototype.onInit = function(context) {
-    var gl      = context.gl;
+    var gl = context.gl;
     
     CubeModel.createBuffers(gl);
+    Camera.setPerspective(gl);
     
     Base.prototype.onInit();
   };
   
   LabOne.prototype.onRender = function(context, delta) {
     
+    
+    Camera.resetMvMatrix();
+    
+    Camera.translate([-1.5, 0.0, -7.0]);
+    Camera.rotate(-1.0, [1, 1, 1]);
+    
     Camera.setMatrixUniforms(context);
-    CubeModel.draw(context);
+    CubeModel.draw(context, Camera);
     
   };
   

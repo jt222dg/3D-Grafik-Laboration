@@ -10,7 +10,8 @@ define(function(require) {
     
     handles : {
       uniform : {
-        matrix   : undefined
+        modelViewMatrix   : undefined,
+        projectionMatrix  : undefined
       },
       
       attrib : {
@@ -37,8 +38,12 @@ define(function(require) {
           console.log('A WebGL context could not be initialised:', e);
         }
         
-        this.gl.viewport(0.0, 0.0, canvas.width, canvas.height);
+        this.gl.viewportWidth = canvas.width;
+        this.gl.viewportHeight = canvas.height;
+        
+        this.gl.viewport(0.0, 0.0, this.gl.viewportWidth, this.gl.viewportHeight);
         this.gl.clearColor(0.0, 0.0, 0.0, 1.0);
+        this.gl.enable(this.gl.DEPTH_TEST);
       }
     },
     
@@ -67,7 +72,9 @@ define(function(require) {
       var program = this.program;
       
       this.handles.uniform.matrix = gl.getUniformLocation(program, 'matrix');
-    
+      this.handles.uniform.modelViewMatrix = gl.getUniformLocation(program, 'modelViewMatrix');
+      this.handles.uniform.projectionMatrix = gl.getUniformLocation(program, 'projectionMatrix');
+      
       this.handles.attrib.position = gl.getAttribLocation(program, 'position');
       gl.enableVertexAttribArray(this.handles.attrib.position);
       
