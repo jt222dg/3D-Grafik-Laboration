@@ -10,13 +10,14 @@ define(function(require) {
     
     handles : {
       uniform : {
-        modelViewMatrix   : undefined,
-        projectionMatrix  : undefined
+        modelViewMatrix  : undefined,
+        projectionMatrix : undefined,
+        textureSampler   : undefined
       },
       
       attrib : {
-        position : undefined,
-        color    : undefined 
+        position     : undefined,
+        textureCoord : undefined
       }
     },
     
@@ -71,15 +72,15 @@ define(function(require) {
       var gl      = this.gl;
       var program = this.program;
       
-      this.handles.uniform.matrix = gl.getUniformLocation(program, 'matrix');
       this.handles.uniform.modelViewMatrix = gl.getUniformLocation(program, 'modelViewMatrix');
       this.handles.uniform.projectionMatrix = gl.getUniformLocation(program, 'projectionMatrix');
+      this.handles.uniform.textureSampler = gl.getUniformLocation(program, 'textureSampler');
       
       this.handles.attrib.position = gl.getAttribLocation(program, 'position');
       gl.enableVertexAttribArray(this.handles.attrib.position);
       
-      this.handles.attrib.color = gl.getAttribLocation(program, 'color');
-      gl.enableVertexAttribArray(this.handles.attrib.color);
+      this.handles.attrib.textureCoord = gl.getAttribLocation(program, 'textureCoord');
+      gl.enableVertexAttribArray(this.handles.attrib.textureCoord);
     },
     
     clearScreen : function() {

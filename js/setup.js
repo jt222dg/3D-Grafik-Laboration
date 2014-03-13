@@ -14,6 +14,7 @@ require.config({
     utility      : '../utility',
     shader       : '../../shader',
     model        : '../../model',
+    loader       : '../webgl/loader',
     
     // Lib paths
     jquery       : 'jquery/jquery',

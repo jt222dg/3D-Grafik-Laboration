@@ -1,12 +1,12 @@
 attribute vec4 position;
-attribute vec4 color;
+attribute vec2 textureCoord;
 
-uniform mat4 modelViewMatrix;
 uniform mat4 projectionMatrix;
+uniform mat4 modelViewMatrix;
 
-varying vec4 fragColor;
+varying vec2 fragTexCoord;
 
 void main(void) {
 	gl_Position = projectionMatrix * modelViewMatrix * position;
-	fragColor = color;
+	fragTexCoord = textureCoord;
 }

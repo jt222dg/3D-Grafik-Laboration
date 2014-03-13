@@ -64,7 +64,8 @@ define(function(require) {
       delta     = (startTime - endTime) / 1000;
       delta     = delta < 0.016 ? delta : 0.016;
       endTime   = startTime;
-
+      
+      that._controller.onLogic(delta);
       Context.clearScreen();
       that._controller.onRender(Context, delta);
           
