@@ -10,6 +10,7 @@ define(function(require) {
       var that = this;
       texture.image.onload = function() {
         that.bindTexture(gl, texture);
+        texture.isLoaded = true;
       };
       
       texture.image.src = source;

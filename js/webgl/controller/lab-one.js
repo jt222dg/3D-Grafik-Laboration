@@ -21,7 +21,11 @@ define(function(require) {
   LabOne.prototype.onInit = function(context) {
     var gl = context.gl;
     
-    CubeModel.createBuffers(gl);
+    var buffers = CubeModel.buffers;
+    for (var key in buffers) {
+      context.bindBuffer(buffers[key]);
+    }
+    
     Camera.setPerspective(gl);
     CubeModel.texture = TextureLoader.loadTexture(gl, 'texture/crate.gif');
     
