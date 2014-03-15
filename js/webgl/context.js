@@ -12,7 +12,10 @@ define(function(require) {
       uniform : {
         modelViewMatrix  : undefined,
         projectionMatrix : undefined,
-        textureSampler   : undefined
+        textureSampler   : undefined,
+        directionalLight : {
+          ambient : undefined
+        }
       },
       
       attrib : {
@@ -75,6 +78,7 @@ define(function(require) {
       this.handles.uniform.modelViewMatrix = gl.getUniformLocation(program, 'modelViewMatrix');
       this.handles.uniform.projectionMatrix = gl.getUniformLocation(program, 'projectionMatrix');
       this.handles.uniform.textureSampler = gl.getUniformLocation(program, 'textureSampler');
+      this.handles.uniform.directionalLight.ambient = gl.getUniformLocation(program, 'directionalLight.ambient');
       
       this.handles.attrib.position = gl.getAttribLocation(program, 'position');
       gl.enableVertexAttribArray(this.handles.attrib.position);

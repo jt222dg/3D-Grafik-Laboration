@@ -5,6 +5,7 @@ define(function(require) {
   var Camera        = require('webgl/camera');
   var Matrix        = require('utility/glmatrix');
   var TextureLoader = require('loader/texture');
+  var DirectionalLight = require('light/directional');
   
   // Models
   var CubeModel = require('model/cube');
@@ -13,6 +14,7 @@ define(function(require) {
     
     this._rotationVelocity = 100.0;
     this._cubeRotation = 0.0;
+    this._directionalLight = new DirectionalLight();
     
   };
   
@@ -48,6 +50,15 @@ define(function(require) {
     Camera.translate([-1.5, 0.0, -7.0]);
     Camera.rotate(Matrix.glMatrix.toRadian(this._cubeRotation), [1, 1, 1]);
     
+    Camera.setMatrixUniforms(context);
+    CubeModel.draw(context, Camera);
+    
+    Camera.resetMvMatrix();
+    
+    Camera.translate([1.0, 0.0, -8.0]);
+    Camera.rotate(Matrix.glMatrix.toRadian(-this._cubeRotation), [1, 0, 0]);
+    
+    this._directionalLight.setUniforms(context);
     Camera.setMatrixUniforms(context);
     CubeModel.draw(context, Camera);
     
