@@ -1,8 +1,6 @@
 define(function(require) {
   
   var Cube = {
-    name : "Cube",
-    
     texture : undefined,
     
     draw : function(context) {
@@ -20,6 +18,9 @@ define(function(require) {
         gl.bindBuffer(gl.ARRAY_BUFFER , buffers.vertexPositions.id);
         gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, buffers.vertexIndicies.id);
         gl.vertexAttribPointer(context.handles.attrib.position, buffers.vertexPositions.itemSize, gl.FLOAT, false, 0, 0);
+        
+        gl.bindBuffer(gl.ARRAY_BUFFER, buffers.vertexNormals.id);
+        gl.vertexAttribPointer(context.handles.attrib.normal, buffers.vertexNormals.itemSize, gl.FLOAT, false, 0, 0);
         
         gl.drawElements(gl.TRIANGLES, buffers.vertexIndicies.numItems, gl.UNSIGNED_SHORT, 0);
       }
@@ -68,6 +69,54 @@ define(function(require) {
           -1.0, -1.0,  1.0,
           -1.0,  1.0,  1.0,
           -1.0,  1.0, -1.0
+        ],
+        
+        itemSize : 3,
+        numItems : 0
+      },
+      
+      vertexNormals : {
+        
+        id : undefined,
+        dataType   : 'float',
+        bufferType : 'array',
+        
+        data : [
+          // Front face
+           0.0,  0.0,  1.0,
+           0.0,  0.0,  1.0,
+           0.0,  0.0,  1.0,
+           0.0,  0.0,  1.0,
+    
+          // Back face
+           0.0,  0.0, -1.0,
+           0.0,  0.0, -1.0,
+           0.0,  0.0, -1.0,
+           0.0,  0.0, -1.0,
+    
+          // Top face
+           0.0,  1.0,  0.0,
+           0.0,  1.0,  0.0,
+           0.0,  1.0,  0.0,
+           0.0,  1.0,  0.0,
+    
+          // Bottom face
+           0.0, -1.0,  0.0,
+           0.0, -1.0,  0.0,
+           0.0, -1.0,  0.0,
+           0.0, -1.0,  0.0,
+    
+          // Right face
+           1.0,  0.0,  0.0,
+           1.0,  0.0,  0.0,
+           1.0,  0.0,  0.0,
+           1.0,  0.0,  0.0,
+    
+          // Left face
+          -1.0,  0.0,  0.0,
+          -1.0,  0.0,  0.0,
+          -1.0,  0.0,  0.0,
+          -1.0,  0.0,  0.0
         ],
         
         itemSize : 3,
@@ -143,8 +192,9 @@ define(function(require) {
     }
   };
 
-  Cube.buffers.vertexIndicies.numItems  = Math.floor(Cube.buffers.vertexIndicies.data.length  / Cube.buffers.vertexIndicies.itemSize);
+  Cube.buffers.vertexNormals.numItems   = Math.floor(Cube.buffers.vertexNormals.data.length   / Cube.buffers.vertexNormals.itemSize);
   Cube.buffers.vertexPositions.numItems = Math.floor(Cube.buffers.vertexPositions.data.length / Cube.buffers.vertexPositions.itemSize);
+  Cube.buffers.vertexIndicies.numItems  = Math.floor(Cube.buffers.vertexIndicies.data.length  / Cube.buffers.vertexIndicies.itemSize);
   Cube.buffers.textureCoords.numItems   = Math.floor(Cube.buffers.textureCoords.data.length   / Cube.buffers.textureCoords.itemSize);
   
   return Cube;

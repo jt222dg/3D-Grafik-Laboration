@@ -49,6 +49,7 @@ define(function(require) {
     
     Camera.translate([-1.5, 0.0, -7.0]);
     Camera.rotate(Matrix.glMatrix.toRadian(this._cubeRotation), [1, 1, 1]);
+    Camera.scale([0.5, 0.5, 0.5]);
     
     Camera.setMatrixUniforms(context);
     CubeModel.draw(context, Camera);
@@ -57,6 +58,7 @@ define(function(require) {
     
     Camera.translate([1.0, 0.0, -8.0]);
     Camera.rotate(Matrix.glMatrix.toRadian(-this._cubeRotation), [1, 0, 0]);
+    Camera.rotate(Matrix.glMatrix.toRadian(20), [0, 1, 0]);
     
     this._directionalLight.setUniforms(context);
     Camera.setMatrixUniforms(context);

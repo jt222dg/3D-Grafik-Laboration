@@ -12,14 +12,18 @@ define(function(require) {
       uniform : {
         modelViewMatrix  : undefined,
         projectionMatrix : undefined,
+        normalMatrix     : undefined,
         textureSampler   : undefined,
         directionalLight : {
-          ambient : undefined
+          ambient : undefined,
+          diffuse : undefined,
+          direction : undefined
         }
       },
       
       attrib : {
         position     : undefined,
+        normal       : undefined,
         textureCoord : undefined
       }
     },
@@ -77,11 +81,18 @@ define(function(require) {
       
       this.handles.uniform.modelViewMatrix = gl.getUniformLocation(program, 'modelViewMatrix');
       this.handles.uniform.projectionMatrix = gl.getUniformLocation(program, 'projectionMatrix');
+      this.handles.uniform.normalMatrix = gl.getUniformLocation(program, 'normalMatrix');
       this.handles.uniform.textureSampler = gl.getUniformLocation(program, 'textureSampler');
+      
       this.handles.uniform.directionalLight.ambient = gl.getUniformLocation(program, 'directionalLight.ambient');
+      this.handles.uniform.directionalLight.diffuse = gl.getUniformLocation(program, 'directionalLight.diffuse');
+      this.handles.uniform.directionalLight.direction = gl.getUniformLocation(program, 'directionalLight.direction');
       
       this.handles.attrib.position = gl.getAttribLocation(program, 'position');
       gl.enableVertexAttribArray(this.handles.attrib.position);
+      
+      this.handles.attrib.normal = gl.getAttribLocation(program, 'normal');
+      gl.enableVertexAttribArray(this.handles.attrib.normal);
       
       this.handles.attrib.textureCoord = gl.getAttribLocation(program, 'textureCoord');
       gl.enableVertexAttribArray(this.handles.attrib.textureCoord);
