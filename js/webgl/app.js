@@ -10,10 +10,9 @@ define(function(require) {
   var LabOneController   = require('webgl/controller/lab-one');
   var LabTwoController   = require('webgl/controller/lab-two');
   var LabThreeController = require('webgl/controller/lab-three');
-  
-  // Shaders
-  var vsScript = require('text!shader/vertex-shader.vs');
-  var fsScript = require('text!shader/fragment-shader.fs');
+  var CubeModel          = require('model/cube');
+  var TextureLoader      = require('loader/texture');
+  var Camera             = require('webgl/camera');
   
   var App = function() {
   };
@@ -21,26 +20,41 @@ define(function(require) {
   App.prototype.onInit = function() {
     this._running = true;
     
-    Context.onInit(vsScript, fsScript);
+    Context.onInit();
+    
+    this.initBuffers();
+    
+    CubeModel.texture = TextureLoader.loadTexture(Context.gl, 'texture/crate.gif');
+    
+    Camera.setPerspective(Context.gl);
     
     this._controller = new BaseController();
     this._controller.onInit();
     
     var that = this;
     $('#lab-one-button').click(function() {
+      that._controller.onCleanUp();
       that._controller = new LabOneController();
       that._controller.onInit(Context);
     });
     
     $('#lab-two-button').click(function() {
+      that._controller.onCleanUp();
       that._controller = new LabTwoController();
       that._controller.onInit(Context);
     });
     
     $('#lab-three-button').click(function() {
+      that._controller.onCleanUp();
       that._controller = new LabThreeController();
       that._controller.onInit(Context);
     });
+  };
+  
+  App.prototype.initBuffers = function() {
+    for (var key in CubeModel.buffers) {
+      Context.initBuffer(CubeModel.buffers[key]);
+    }
   };
   
   App.prototype.onCleanUp = function() {

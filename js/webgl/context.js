@@ -6,35 +6,9 @@ define(function(require) {
   var Context = {
     
     gl      : undefined,
-    program : undefined,
     
-    handles : {
-      uniform : {
-        modelViewMatrix  : undefined,
-        projectionMatrix : undefined,
-        normalMatrix     : undefined,
-        textureSampler   : undefined,
-        directionalLight : {
-          ambient : undefined,
-          diffuse : undefined,
-          direction : undefined
-        }
-      },
+    onInit : function() {
       
-      attrib : {
-        position     : undefined,
-        normal       : undefined,
-        textureCoord : undefined
-      }
-    },
-    
-    onInit : function(vsScript, fsScript) {
-      this.setContext();
-      this.initProgram(vsScript, fsScript);
-      this.initHandles();
-    },
-    
-    setContext : function() {
       var canvas = $('#canvas').get(0);
       if (canvas !== undefined) {
         canvas.width  = Math.round(canvas.offsetWidth);
@@ -53,52 +27,33 @@ define(function(require) {
         this.gl.clearColor(0.390, 0.582, 0.926, 1.0);
         this.gl.enable(this.gl.DEPTH_TEST);
       }
+      
     },
     
-    initProgram : function(vsScript, fsScript) {
+    createProgram : function(vsScript, fsScript) {
       var gl = this.gl;
       
+      // Compile vertex shader
       var vertexShader = gl.createShader(gl.VERTEX_SHADER);
       gl.shaderSource(vertexShader, vsScript);
       gl.compileShader(vertexShader);
       
+      // Compile fragment shader
       var fragmentShader = gl.createShader(gl.FRAGMENT_SHADER);
       gl.shaderSource(fragmentShader, fsScript);
       gl.compileShader(fragmentShader);
       
       // Link program with shaders
-      this.program = gl.createProgram();
-      gl.attachShader(this.program, vertexShader);
-      gl.attachShader(this.program, fragmentShader);
+      var program = gl.createProgram();
+      gl.attachShader(program, vertexShader);
+      gl.attachShader(program, fragmentShader);
+      gl.linkProgram(program);
+      gl.useProgram(program);
       
-      gl.linkProgram(this.program);
-      gl.useProgram(this.program);
+      return program;
     },
     
-    initHandles : function() {
-      var gl      = this.gl;
-      var program = this.program;
-      
-      this.handles.uniform.modelViewMatrix = gl.getUniformLocation(program, 'modelViewMatrix');
-      this.handles.uniform.projectionMatrix = gl.getUniformLocation(program, 'projectionMatrix');
-      this.handles.uniform.normalMatrix = gl.getUniformLocation(program, 'normalMatrix');
-      this.handles.uniform.textureSampler = gl.getUniformLocation(program, 'textureSampler');
-      
-      this.handles.uniform.directionalLight.ambient = gl.getUniformLocation(program, 'directionalLight.ambient');
-      this.handles.uniform.directionalLight.diffuse = gl.getUniformLocation(program, 'directionalLight.diffuse');
-      this.handles.uniform.directionalLight.direction = gl.getUniformLocation(program, 'directionalLight.direction');
-      
-      this.handles.attrib.position = gl.getAttribLocation(program, 'position');
-      gl.enableVertexAttribArray(this.handles.attrib.position);
-      
-      this.handles.attrib.normal = gl.getAttribLocation(program, 'normal');
-      gl.enableVertexAttribArray(this.handles.attrib.normal);
-      
-      this.handles.attrib.textureCoord = gl.getAttribLocation(program, 'textureCoord');
-      gl.enableVertexAttribArray(this.handles.attrib.textureCoord);
-    },
-    
-    bindBuffer : function(buffer) {
+    initBuffer : function(buffer) {
       
       var gl = this.gl;
       var bufferType = buffer.bufferType === 'array' ? gl.ARRAY_BUFFER : gl.ELEMENT_ARRAY_BUFFER;

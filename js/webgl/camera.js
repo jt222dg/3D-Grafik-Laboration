@@ -6,9 +6,8 @@ define(function(require) {
     modelViewMatrix  : Matrix.mat4.create(),
     projectionMatrix : Matrix.mat4.create(),
     
-    setMatrixUniforms : function(context) {
-      var gl = context.gl;
-      var uniforms = context.handles.uniform;
+    setMatrixUniforms : function(gl, technique) {
+      var uniforms = technique.location.uniform;
       
       gl.uniformMatrix4fv(uniforms.modelViewMatrix, false, this.modelViewMatrix);
       gl.uniformMatrix4fv(uniforms.projectionMatrix, false, this.projectionMatrix);

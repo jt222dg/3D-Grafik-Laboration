@@ -3,24 +3,25 @@ define(function(require) {
   var Cube = {
     texture : undefined,
     
-    draw : function(context) {
+    draw : function(gl, technique) {
       if (this.texture.isLoaded) {
-        var gl = context.gl;
         var buffers = this.buffers;
+        var attrib = technique.location.attrib;
+        var uniform = technique.location.uniform;
         
         gl.bindBuffer(gl.ARRAY_BUFFER, buffers.textureCoords.id);
-        gl.vertexAttribPointer(context.handles.attrib.textureCoord, buffers.textureCoords.itemSize, gl.FLOAT, false, 0, 0);
+        gl.vertexAttribPointer(attrib.textureCoord, buffers.textureCoords.itemSize, gl.FLOAT, false, 0, 0);
         
         gl.activeTexture(gl.TEXTURE0);
         gl.bindTexture(gl.TEXTURE_2D, this.texture);
-        gl.uniform1i(context.handles.uniform.textureSampler, 0);
+        gl.uniform1i(uniform.textureSampler, 0);
           
         gl.bindBuffer(gl.ARRAY_BUFFER , buffers.vertexPositions.id);
         gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, buffers.vertexIndicies.id);
-        gl.vertexAttribPointer(context.handles.attrib.position, buffers.vertexPositions.itemSize, gl.FLOAT, false, 0, 0);
+        gl.vertexAttribPointer(attrib.position, buffers.vertexPositions.itemSize, gl.FLOAT, false, 0, 0);
         
         gl.bindBuffer(gl.ARRAY_BUFFER, buffers.vertexNormals.id);
-        gl.vertexAttribPointer(context.handles.attrib.normal, buffers.vertexNormals.itemSize, gl.FLOAT, false, 0, 0);
+        gl.vertexAttribPointer(attrib.normal, buffers.vertexNormals.itemSize, gl.FLOAT, false, 0, 0);
         
         gl.drawElements(gl.TRIANGLES, buffers.vertexIndicies.numItems, gl.UNSIGNED_SHORT, 0);
       }
