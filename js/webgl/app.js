@@ -13,6 +13,8 @@ define(function(require) {
   var CubeModel          = require('model/cube');
   var TextureLoader      = require('loader/texture');
   var Camera             = require('webgl/camera');
+  var PhongTechnique     = require('technique/phong/phong');
+  var EffectTechnique    = require('technique/effect/effect');
   
   var App = function() {
   };
@@ -21,6 +23,8 @@ define(function(require) {
     this._running = true;
     
     Context.onInit();
+    PhongTechnique.onInit(Context);
+    EffectTechnique.onInit(Context);
     
     this.initBuffers();
     

@@ -1,12 +1,12 @@
 define(function(require) {
   
-  var $             = require('jquery');
-  var _             = require('underscore');
-  var Base          = require('webgl/controller/base');
-  var Camera        = require('webgl/camera');
-  var Matrix        = require('utility/glmatrix');
+  var $                = require('jquery');
+  var _                = require('underscore');
+  var Base             = require('webgl/controller/base');
+  var Camera           = require('webgl/camera');
+  var Matrix           = require('utility/glmatrix');
   var DirectionalLight = require('light/directional');
-  var PhongTechnique = require('technique/phong/phong');
+  var PhongTechnique   = require('technique/phong/phong');
   
   // Models
   var CubeModel = require('model/cube');
@@ -42,7 +42,7 @@ define(function(require) {
   
   LabOne.prototype.onInit = function(context) {
     
-    PhongTechnique.onInit(context);
+    PhongTechnique.useProgram(context.gl);
     
   };
   
@@ -58,19 +58,21 @@ define(function(require) {
     
     Camera.resetMvMatrix();
     
-    Camera.translate([0.0, 0.0, -7.0]);
-    Camera.rotate(Matrix.glMatrix.toRadian(30), [1, 1, 1]);
-    
-    context.gl.uniform1f(PhongTechnique.location.uniform.textureScale, 1.0);
-    
     if (this._goCrazy) {
       this._directionalLight.setDiffuse([this._a, this._b, this._c]);
       this._directionalLight.setAmbient([this._b, this._c, this._a]);
       this._directionalLight.setDirection([this._c, this._a, this._b]);
+      
+      Camera.translate([0.0, 0.0, -7.0]);
+      Camera.rotate(Matrix.glMatrix.toRadian(Math.floor(Math.random() * 360) + 1), [1, 1, 1]);
+      Camera.translate([-0.5, 0.0, 0.0]);
     } else {
       this._directionalLight.setAmbient([0.45, 0.45, 0.45]);
       this._directionalLight.setDiffuse([1.0, 1.0, 1.0]);
       this._directionalLight.setDirection([0.5, 1.0, 0.0]);
+      
+      Camera.translate([0.0, 0.0, -7.0]);
+      Camera.rotate(Matrix.glMatrix.toRadian(30), [1, 1, 1]);
     }
     
     this._directionalLight.setUniforms(context.gl, PhongTechnique);

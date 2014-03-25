@@ -22,7 +22,7 @@ define(function(require) {
   
   LabThree.prototype.onInit = function(context) {
     
-    PhongTechnique.onInit(context);
+    PhongTechnique.useProgram(context.gl);
     
   };
   
@@ -42,8 +42,6 @@ define(function(require) {
     Camera.translate([-1.5, 0.0, -7.0]);
     Camera.rotate(Matrix.glMatrix.toRadian(this._cubeRotation), [1, 1, 1]);
     Camera.scale([0.5, 0.5, 0.5]);
-    
-    context.gl.uniform1f(PhongTechnique.location.uniform.textureScale, 1.0);
     
     this._directionalLight.setUniforms(context.gl, PhongTechnique);
     Camera.setMatrixUniforms(context.gl, PhongTechnique);
