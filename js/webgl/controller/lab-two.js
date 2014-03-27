@@ -13,7 +13,9 @@ define(function(require) {
   var LabTwo = function() {
     
     this._directionalLight = new DirectionalLight();
-    this._directionalLight.setAmbient([0.4, 0.4, 0.4]);
+    this._directionalLight.setAmbient([0.5, 0.5, 0.5]);
+    this._directionalLight.setDiffuse([0.3, 0.3, 0.3]);
+    this._directionalLight.setDirection([1.0, 3.0, 5.0]);
     
     this._textureScale = 1.0;
     this._textureIsRepeating = false;
@@ -29,7 +31,9 @@ define(function(require) {
     var buttons = '<li><button id="repeat-texture-button">Repeat Texture</button></li>';
     buttons += '<li><button id="inverted-button">Inverted</button></li>';
     buttons += '<li><button id="greyscale-button">Greyscale</button></li>';
-    buttons += '<li><button id="texture-as-color-button">Texture As Colo</button></li>';
+    buttons += '<li><button id="texture-as-color-button">Texture As Color</button></li>';
+    buttons += '<li><button id="gaussian-blur-button">Blur</button></li>';
+    buttons += '<li><button id="render-odds-button">Render Odd Pixels</button></li>';
     
     $('<div class="center-div" id="alternatives-div"><ul>' + buttons + '</ul></div>').insertAfter('#canvas');
     
@@ -42,7 +46,7 @@ define(function(require) {
         $('#repeat-texture-button').html('Single Texture');
       } else {
         that._textureScale = 1.0;
-        $('#repeat-texture-button').html('Repeate Texture');
+        $('#repeat-texture-button').html('Repeat Texture');
       }
     });
     
@@ -73,6 +77,26 @@ define(function(require) {
         $('#greyscale-button').html('Color');
       } else {
         $('#greyscale-button').html('Greyscale');
+      }
+    });
+    
+    $('#gaussian-blur-button').click(function() {
+      EffectTechnique.toggleGaussianBlur(context.gl);
+      
+      if (EffectTechnique.mode.gaussianBlur) {
+        $('#gaussian-blur-button').html('No Blur');
+      } else {
+        $('#gaussian-blur-button').html('Blur');
+      }
+    });
+    
+    $('#render-odds-button').click(function() {
+      EffectTechnique.toggleRenderOdds(context.gl);
+      
+      if (EffectTechnique.mode.renderOdds) {
+        $('#render-odds-button').html('Render Odd Pixels');
+      } else {
+        $('#render-odds-button').html('Render All Pixels');
       }
     });
     
