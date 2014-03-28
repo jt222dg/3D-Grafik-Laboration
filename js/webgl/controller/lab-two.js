@@ -13,9 +13,9 @@ define(function(require) {
   var LabTwo = function() {
     
     this._directionalLight = new DirectionalLight();
-    this._directionalLight.setAmbient([0.5, 0.5, 0.5]);
+    this._directionalLight.setAmbient([0.4, 0.4, 0.4]);
     this._directionalLight.setDiffuse([0.3, 0.3, 0.3]);
-    this._directionalLight.setDirection([1.0, 3.0, 5.0]);
+    this._directionalLight.setDirection([1.0, -3.0, 5.0]);
     
     this._textureScale = 1.0;
     this._textureIsRepeating = false;
@@ -111,7 +111,7 @@ define(function(require) {
     Camera.resetMvMatrix();
     
     Camera.translate([0.0, 0.0, -4.0]);
-    Camera.rotate(Matrix.glMatrix.toRadian(60), [1, 1, 1]);
+    Camera.rotate(Matrix.glMatrix.toRadian(50), [1, 1, 1]);
     
     context.gl.uniform1f(EffectTechnique.location.uniform.textureScale, this._textureScale);
     

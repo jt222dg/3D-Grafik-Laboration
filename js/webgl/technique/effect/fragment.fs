@@ -41,20 +41,16 @@ void main(void) {
   }
   if (mode.renderOdds)
   {
-    vec4 black = vec4(0.0, 0.0, 0.0, 1.0);
-    if (fragTexCoord.x == 0.0)
+    // One pixel in texture coords
+    const float dt = 1.0/256.0;
+    
+    
+    // One pixel in integer
+    float pixel = fragTexCoord.x / dt;
+    
+    if (floor(mod(pixel, 2.0)) == floor(0.0))
     {
-      textureColor = black;
-    }
-    else
-    {
-      float dt = 1.0/256.0;
-      
-      vec4 lastPixelColor = texture2D(textureSampler, vec2(fragTexCoord.x-dt, fragTexCoord.y));
-      if (lastPixelColor != black)
-      {
-        textureColor = black;
-      }
+      textureColor = vec4(0.0, 0.0, 0.0, 1.0);
     }
   }
   if (mode.texcoordsAsColors)
