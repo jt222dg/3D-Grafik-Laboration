@@ -94,9 +94,9 @@ define(function(require) {
       EffectTechnique.toggleRenderOdds(context.gl);
       
       if (EffectTechnique.mode.renderOdds) {
-        $('#render-odds-button').html('Render Odd Pixels');
-      } else {
         $('#render-odds-button').html('Render All Pixels');
+      } else {
+        $('#render-odds-button').html('Render Odd Pixels');
       }
     });
     
